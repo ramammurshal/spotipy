@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Gotham';
+  src: url('../font/GothamMedium.ttf');
+}
+
+.plain__btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  margin: 0 15px;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.bg__btn {
+  padding: 12px 30px;
+  border-radius: 50px;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+}
