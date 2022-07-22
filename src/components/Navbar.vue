@@ -10,114 +10,55 @@
     </div>
     <div class="nav__auth">
       <button
-        class="plain__btn"
-        data-bs-toggle="modal"
-        data-bs-target="#modal__auth"
-        @click="tab = 'sign_up'"
-      >
-        Sign up
-      </button>
-      <button
+        v-if="!userLoggedIn"
         class="bg__btn"
         data-bs-toggle="modal"
         data-bs-target="#modal__auth"
-        @click="tab = 'log_in'"
       >
-        Log in
+        Sign up / Log in
       </button>
+      <button
+        v-else
+        class="bg__btn dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        data-bs-offset="0,10"
+      >
+        User
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+          <button class="dropdown-item" type="button" @click.prevent="signOut">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log out
+          </button>
+        </li>
+      </ul>
     </div>
   </nav>
 
   <!-- Modal -->
-  <div
-    class="modal fade"
-    id="modal__auth"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div>
-            <button
-              :class="{
-                plain__btn: tab === 'log_in',
-                bg__btn: tab === 'sign_up',
-              }"
-              @click="tab = 'sign_up'"
-            >
-              Sign up
-            </button>
-            <button
-              :class="{
-                plain__btn: tab === 'sign_up',
-                bg__btn: tab === 'log_in',
-              }"
-              @click="tab = 'log_in'"
-            >
-              Log in
-            </button>
-          </div>
-          <button type="button" data-bs-dismiss="modal" class="plain__btn">
-            <i class="fa-solid fa-x"></i>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form class="form__sign__up" v-if="tab === 'sign_up'">
-            <h2 class="mb-3">Register</h2>
-            <div class="mb-3">
-              <label for="name" class="form-label"
-                >Name <span class="text-warning">*</span></label
-              >
-              <input type="text" class="form-control" id="name" />
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label"
-                >Email <span class="text-warning">*</span></label
-              >
-              <input type="Email" class="form-control" id="email" />
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label"
-                >Password <span class="text-warning">*</span></label
-              >
-              <input type="password" class="form-control" id="password" />
-            </div>
-            <button class="btn btn-success mt-2 float-end">Register</button>
-          </form>
-          <form class="form__log__in" v-else>
-            <h2 class="mb-3">Login</h2>
-            <div class="mb-3">
-              <label for="email" class="form-label"
-                >Email <span class="text-warning">*</span></label
-              >
-              <input type="Email" class="form-control" id="email" />
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label"
-                >Password <span class="text-warning">*</span></label
-              >
-              <input type="password" class="form-control" id="password" />
-            </div>
-            <button class="btn btn-success mt-2 float-end">Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <Modal />
   <!-- ./ Modal -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapState } from 'vuex';
+import Modal from './Modal.vue';
 
 export default defineComponent({
   name: 'Navbar',
-  data() {
-    return {
-      tab: 'sign_up' as 'sign_up' | 'log_in',
-    };
+  components: {
+    Modal,
+  },
+  computed: {
+    ...mapState(['userLoggedIn']),
+  },
+  methods: {
+    async signOut() {
+      await this.$store.dispatch('signOut');
+      window.location.reload();
+    },
   },
 });
 </script>
@@ -145,9 +86,18 @@ nav {
       }
     }
   }
-}
 
-.modal-content {
-  background-color: #222222;
+  .nav__auth {
+    .dropdown-menu {
+      &:hover {
+        background: #1ed760;
+
+        button {
+          background: #1ed760;
+          color: #fff;
+        }
+      }
+    }
+  }
 }
 </style>

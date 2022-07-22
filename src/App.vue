@@ -1,9 +1,9 @@
 <template>
-  <div class="main__app d-flex">
+  <div class="__app d-flex">
     <Sidebar />
-    <div class="main__content">
-      <Navbar />
-    </div>
+    <main>
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 
@@ -18,7 +18,9 @@ export default defineComponent({
     Sidebar,
     Navbar,
   },
-  setup() {},
+  created() {
+    this.$store.dispatch('init_login');
+  },
 });
 </script>
 
@@ -28,13 +30,16 @@ export default defineComponent({
   src: url('./assets/font/GothamMedium.ttf');
 }
 
-.main__app {
+.__app {
   background-color: #0e0e0e;
   color: white;
   font-family: 'Goth';
+  height: 100vh;
 
-  .main__content {
+  main {
     width: 100%;
+    height: 100%;
+    overflow: auto;
   }
 }
 </style>

@@ -1,6 +1,17 @@
-@font-face {
-  font-family: 'Gotham';
-  src: url('../font/GothamMedium.ttf');
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ddd;
 }
 
 .plain__btn {

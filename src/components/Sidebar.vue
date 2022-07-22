@@ -11,30 +11,30 @@
 
     <!-- sidebar__content -->
     <div class="sidebar__content">
-      <!-- home -->
-      <router-link to="/">
+      <router-link :to="{ name: 'home' }">
         <div class="item__link">
           <i class="fas fa-home icon"></i>
           <p>Home</p>
         </div>
       </router-link>
-      <!-- ./ home -->
-      <!-- search -->
-      <router-link to="/">
+      <router-link :to="{ name: 'search' }">
         <div class="item__link">
           <i class="fas fa-search icon"></i>
           <p>Search</p>
         </div>
       </router-link>
-      <!-- ./ search -->
-      <!-- category -->
-      <router-link to="/">
+      <router-link :to="{ name: 'manage' }">
         <div class="item__link">
-          <i class="fa-solid fa-user icon"></i>
+          <i class="fa-solid fa-pen-to-square icon"></i>
+          <p>Manage</p>
+        </div>
+      </router-link>
+      <router-link :to="{ name: 'about' }">
+        <div class="item__link">
+          <i class="fa-solid fa-tablet-screen-button icon"></i>
           <p>About</p>
         </div>
       </router-link>
-      <!-- ./ category -->
     </div>
     <!-- ./ sidebar__content -->
   </aside>
@@ -52,8 +52,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 aside {
   background-color: #000;
-  height: 100vh;
-  width: 300px;
+  height: 100%;
+  width: 350px;
   padding: 20px;
 
   a {
@@ -86,6 +86,8 @@ aside {
   }
 
   .sidebar__content {
+    // a.router-link-active soon
+
     .item__link {
       display: flex;
       align-items: center;
