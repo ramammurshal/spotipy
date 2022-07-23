@@ -30,7 +30,7 @@
             </button>
           </div>
           <button type="button" data-bs-dismiss="modal" class="plain__btn">
-            <i class="fa-solid fa-x"></i>
+            <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
         <div class="modal-body">

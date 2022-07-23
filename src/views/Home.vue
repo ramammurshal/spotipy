@@ -19,6 +19,7 @@
           :index="i"
           img_src="naruto.jpeg"
           title="Naruto"
+          artist="Japanese Band"
           uploader="Rama Muhammad Murshal"
           last_modified="22 July 2022"
           time="3:33"

@@ -21,6 +21,7 @@ export default defineComponent({
   created() {
     this.$store.dispatch('init_login');
   },
+  // to do global: disable button form when in_submission is true
 });
 </script>
 

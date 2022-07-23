@@ -16,7 +16,9 @@
         >Email <span class="text-warning">*</span></label
       >
       <vee-field type="Email" class="form-control" id="email" name="email" />
-      <ErrorMessage name="email" class="text-warning d-inline-block mt-2" />
+      <small>
+        <ErrorMessage name="email" class="text-warning d-inline-block mt-2" />
+      </small>
     </div>
     <!-- password -->
     <div class="mb-3">
@@ -29,7 +31,12 @@
         id="password"
         name="password"
       />
-      <ErrorMessage name="password" class="text-warning d-inline-block mt-2" />
+      <small>
+        <ErrorMessage
+          name="password"
+          class="text-warning d-inline-block mt-2"
+        />
+      </small>
     </div>
     <button class="btn btn-success mt-2 float-end">Login</button>
   </vee-form>

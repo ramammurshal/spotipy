@@ -11,30 +11,25 @@
 
     <!-- sidebar__content -->
     <div class="sidebar__content">
-      <router-link :to="{ name: 'home' }">
-        <div class="item__link">
-          <i class="fas fa-home icon"></i>
-          <p>Home</p>
-        </div>
-      </router-link>
-      <router-link :to="{ name: 'search' }">
-        <div class="item__link">
-          <i class="fas fa-search icon"></i>
-          <p>Search</p>
-        </div>
-      </router-link>
-      <router-link :to="{ name: 'manage' }">
-        <div class="item__link">
-          <i class="fa-solid fa-pen-to-square icon"></i>
-          <p>Manage</p>
-        </div>
-      </router-link>
-      <router-link :to="{ name: 'about' }">
-        <div class="item__link">
-          <i class="fa-solid fa-tablet-screen-button icon"></i>
-          <p>About</p>
-        </div>
-      </router-link>
+      <SideLink to="home" icon="fas fa-home" title="Home" />
+      <SideLink to="search" icon="fas fa-search" title="Search" />
+      <SideLink
+        to="upload"
+        icon="fa-solid fa-plus"
+        title="Upload"
+        v-if="userLoggedIn"
+      />
+      <SideLink
+        to="manage"
+        icon="fa-solid fa-pen-to-square"
+        title="Manage"
+        v-if="userLoggedIn"
+      />
+      <SideLink
+        to="about"
+        icon="fa-solid fa-tablet-screen-button"
+        title="About Apps"
+      />
     </div>
     <!-- ./ sidebar__content -->
   </aside>
@@ -42,10 +37,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapState } from 'vuex';
+import SideLink from './SideLink.vue';
 
 export default defineComponent({
   name: 'Sidebar',
-  setup() {},
+  components: {
+    SideLink,
+  },
+  computed: {
+    ...mapState(['userLoggedIn']),
+  },
 });
 </script>
 
@@ -73,7 +75,6 @@ aside {
 
     h3 {
       color: white;
-      margin: 0;
       position: relative;
 
       small {
@@ -81,32 +82,6 @@ aside {
         right: -15px;
         top: -5px;
         font-size: 16px;
-      }
-    }
-  }
-
-  .sidebar__content {
-    // a.router-link-active soon
-
-    .item__link {
-      display: flex;
-      align-items: center;
-      color: #ccc;
-      font-size: 16px;
-      margin-bottom: 25px;
-
-      &:hover {
-        color: #fff;
-      }
-
-      .icon {
-        font-size: 22px;
-        width: 20px;
-        margin-right: 25px;
-      }
-
-      p {
-        margin: 0;
       }
     }
   }

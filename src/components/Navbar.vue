@@ -24,7 +24,7 @@
         aria-expanded="false"
         data-bs-offset="0,10"
       >
-        User
+        {{ userDisplayName }}
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
         <li>
@@ -44,6 +44,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapState } from 'vuex';
+import { auth } from '@/includes/firebase';
 import Modal from './Modal.vue';
 
 export default defineComponent({
@@ -53,6 +54,9 @@ export default defineComponent({
   },
   computed: {
     ...mapState(['userLoggedIn']),
+    userDisplayName: () => {
+      return auth.currentUser?.displayName?.split(' ')[0];
+    },
   },
   methods: {
     async signOut() {
@@ -77,7 +81,7 @@ nav {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      color: #ccc;
+      color: #aaa;
       background-color: #111111;
       margin-right: 10px;
 

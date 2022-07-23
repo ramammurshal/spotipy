@@ -7,8 +7,9 @@
         :alt="`Image of ${title}`"
       />
       <div class="content">
-        <h3>{{ title }}</h3>
-        <small>{{ uploader }}</small>
+        <h4>{{ title }}</h4>
+        <h6>Artist: {{ artist }}</h6>
+        <small>Uploader: {{ uploader }}</small>
       </div>
     </td>
     <td>{{ last_modified }}</td>
@@ -31,6 +32,10 @@ export default defineComponent({
       type: String,
     },
     title: {
+      required: true,
+      type: String,
+    },
+    artist: {
       required: true,
       type: String,
     },
@@ -61,17 +66,13 @@ td {
   padding: 10px;
 
   img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    margin-right: 10px;
+    margin-right: 15px;
   }
 
   .content {
-    h3 {
-      margin: 0;
-    }
-
     small {
       color: rgb(167, 167, 167);
     }

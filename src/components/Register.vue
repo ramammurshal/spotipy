@@ -20,7 +20,9 @@
         >Name <span class="text-warning">*</span></label
       >
       <vee-field type="text" class="form-control" id="name" name="name" />
-      <ErrorMessage name="name" class="text-warning d-inline-block mt-2" />
+      <small>
+        <ErrorMessage name="name" class="text-warning d-inline-block mt-2" />
+      </small>
     </div>
     <!-- email -->
     <div class="mb-3">
@@ -28,7 +30,9 @@
         >Email <span class="text-warning">*</span></label
       >
       <vee-field type="Email" class="form-control" id="email" name="email" />
-      <ErrorMessage name="email" class="text-warning d-inline-block mt-2" />
+      <small>
+        <ErrorMessage name="email" class="text-warning d-inline-block mt-2" />
+      </small>
     </div>
     <!-- password -->
     <div class="mb-3">
@@ -42,9 +46,13 @@
           id="passowrd"
           v-bind="field"
         />
-        <div class="text-warning mt-2" v-for="error in errors" :key="error">
+        <small
+          class="text-warning d-inline-block mt-2"
+          v-for="error in errors"
+          :key="error"
+        >
           {{ error }}
-        </div>
+        </small>
       </vee-field>
     </div>
     <!-- password confirm -->
@@ -77,7 +85,7 @@ export default defineComponent({
       schema: {
         name: 'required|min:4|max:70|alpha_spaces',
         email: 'required|min:4|max:70|email',
-        password: 'required|min:6|max:50',
+        password: 'required|min:6|max:50|alpha_spaces',
         password_confirmation: 'password_mismatch:@password',
       },
       regist: {
