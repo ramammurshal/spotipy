@@ -38,7 +38,7 @@
     </div>
 
     <!-- form edit -->
-    <vee-form :validation-schema="schema" v-else>
+    <vee-form :validation-schema="schema" v-else @submit="handleEdit">
       <button
         class="float-end btn btn-warning mt-1"
         @click.prevent="toggleEditSong"
@@ -48,40 +48,43 @@
       <h4 class="mb-3">Edit song</h4>
       <!-- title -->
       <div class="mb-3">
-        <label for="title" class="form-label"
+        <label for="song_title" class="form-label"
           >Song Title <span class="text-warning">*</span></label
         >
         <vee-field
           type="text"
           class="form-control"
-          id="title"
-          name="title"
+          id="song_title"
+          name="song_title"
           v-model="song.song_title"
         />
         <small>
-          <ErrorMessage name="title" class="text-warning d-inline-block mt-2" />
+          <ErrorMessage
+            name="song_title"
+            class="text-warning d-inline-block mt-2"
+          />
         </small>
       </div>
       <!-- artist -->
       <div class="mb-3">
-        <label for="artist" class="form-label"
+        <label for="song_artist" class="form-label"
           >Song Artist <span class="text-warning">*</span></label
         >
         <vee-field
           type="text"
           class="form-control"
-          id="artist"
-          name="artist"
+          id="song_artist"
+          name="song_artist"
           v-model="song.song_artist"
         />
         <small>
           <ErrorMessage
-            name="artist"
+            name="song_artist"
             class="text-warning d-inline-block mt-2"
           />
         </small>
       </div>
-      <button class="btn btn-success">Submit</button>
+      <button class="btn btn-success" :disabled="in_submission">Submit</button>
     </vee-form>
   </div>
 </template>
@@ -89,6 +92,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { songsCollection, storage } from '@/includes/firebase';
+import moment from 'moment';
 
 export default defineComponent({
   name: 'ManageRow',
@@ -102,8 +106,8 @@ export default defineComponent({
     return {
       edit_song: false,
       schema: {
-        title: 'required|min:3|max:50',
-        artist: 'required|min:3|max:50',
+        song_title: 'required|min:3|max:50',
+        song_artist: 'required|min:3|max:50',
       },
       in_submission: false,
       show_alert: false,
@@ -132,6 +136,33 @@ export default defineComponent({
     },
     toggleEditSong() {
       this.edit_song = !this.edit_song;
+    },
+    async handleEdit(values: any) {
+      console.log(values);
+
+      this.in_submission = true;
+      this.show_alert = true;
+      this.alert_variant = 'bg-primary';
+      this.alert_message = 'Please wait! We are updating your song.';
+
+      try {
+        await songsCollection.doc(this.$props.song.docId).update({
+          ...values,
+          last_modified: moment().format('YYYY-MM-DDTHH:mm:ss'),
+        });
+      } catch (error) {
+        this.in_submission = false;
+        this.alert_variant = 'bg-danger';
+        this.alert_message =
+          'Something went wront when updating your song! Try again later.';
+        return;
+      }
+
+      this.in_submission = false;
+      this.alert_variant = 'alert-success';
+      this.alert_message = 'Congrats! Your song has been updated.';
+
+      window.location.reload();
     },
   },
 });
