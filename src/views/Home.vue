@@ -3,7 +3,7 @@
   <div class="p-3">
     <h3>All Songs</h3>
     <hr />
-    <table class="table text-white">
+    <table class="table text-white" v-if="songs.length">
       <thead>
         <tr>
           <th>#</th>
@@ -14,23 +14,20 @@
       </thead>
       <tbody>
         <SongRow
-          v-for="i in 10"
-          :key="i"
-          :index="i"
-          img_src="naruto.jpeg"
-          title="Naruto"
-          artist="Japanese Band"
-          uploader="Rama Muhammad Murshal"
-          last_modified="22 July 2022"
-          time="3:33"
+          v-for="(song, index) in songs"
+          :key="song.docId"
+          :song="song"
+          :index="index + 1"
         />
       </tbody>
     </table>
+    <p v-else>Loading...</p>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { songsCollection } from '@/includes/firebase';
 import Navbar from '@/components/Navbar.vue';
 import SongRow from '@/components/SongRow.vue';
 
@@ -39,6 +36,25 @@ export default defineComponent({
   components: {
     Navbar,
     SongRow,
+  },
+  data() {
+    return {
+      songs: [] as Object[],
+    };
+  },
+  async created() {
+    const snapshot: any = await songsCollection.get();
+
+    snapshot.forEach(this.addSong);
+  },
+  methods: {
+    addSong(document: any) {
+      const song: any = {
+        ...document.data(),
+        docId: document.id,
+      };
+      this.songs.push(song);
+    },
   },
 });
 </script>

@@ -138,8 +138,6 @@ export default defineComponent({
       this.edit_song = !this.edit_song;
     },
     async handleEdit(values: any) {
-      console.log(values);
-
       this.in_submission = true;
       this.show_alert = true;
       this.alert_variant = 'bg-primary';
@@ -158,7 +156,6 @@ export default defineComponent({
         return;
       }
 
-      this.in_submission = false;
       this.alert_variant = 'alert-success';
       this.alert_message = 'Congrats! Your song has been updated.';
 

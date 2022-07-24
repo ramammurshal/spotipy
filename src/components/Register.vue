@@ -71,7 +71,12 @@
         class="text-warning d-inline-block mt-2"
       />
     </div>
-    <button class="btn btn-success mt-2 float-end">Register</button>
+    <button
+      class="btn btn-success mt-2 float-end"
+      :disabled="regist.in_submission"
+    >
+      Register
+    </button>
   </vee-form>
 </template>
 
@@ -85,7 +90,7 @@ export default defineComponent({
       schema: {
         name: 'required|min:4|max:70|alpha_spaces',
         email: 'required|min:4|max:70|email',
-        password: 'required|min:6|max:50|alpha_spaces',
+        password: 'required|min:6|max:50',
         password_confirmation: 'password_mismatch:@password',
       },
       regist: {

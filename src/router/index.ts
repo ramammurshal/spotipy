@@ -2,16 +2,23 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import store from '@/store';
 
 const HomeView = () => import('@/views/Home.vue');
+const SongView = () => import('@/views/Song.vue');
 const SearchView = () => import('@/views/Search.vue');
 const UploadView = () => import('@/views/Upload.vue');
 const ManageView = () => import('@/views/Manage.vue');
 const AboutView = () => import('@/views/About.vue');
+const NotFoundView = () => import('@/views/404.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
+  },
+  {
+    name: 'song',
+    path: '/song/:id',
+    component: SongView,
   },
   {
     path: '/search',
@@ -38,6 +45,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/about',
     name: 'about',
     component: AboutView,
+  },
+  {
+    path: '/:catchAll(.*)*',
+    name: '404',
+    component: NotFoundView,
   },
 ];
 

@@ -2,23 +2,23 @@
   <tr>
     <td>{{ index }}</td>
     <td class="title">
-      <img
-        :src="require(`@/assets/images/${img_src}`)"
-        :alt="`Image of ${title}`"
-      />
-      <div class="content">
-        <h4>{{ title }}</h4>
-        <h6>Artist: {{ artist }}</h6>
-        <small>Uploader: {{ uploader }}</small>
-      </div>
+      <router-link :to="{ name: 'song', params: { id: song.docId } }">
+        <img :src="song.cover" :alt="`Image of ${song.song_title}`" />
+        <div class="content">
+          <h4>{{ song.song_title }}</h4>
+          <h6>Artist: {{ song.song_artist }}</h6>
+          <small>Uploader: {{ song.uploader }}</small>
+        </div>
+      </router-link>
     </td>
-    <td>{{ last_modified }}</td>
-    <td>{{ time }}</td>
+    <td>{{ formatLastModified }}</td>
+    <td>3.33</td>
   </tr>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import moment from 'moment';
 
 export default defineComponent({
   name: 'SongRow',
@@ -27,29 +27,14 @@ export default defineComponent({
       required: true,
       type: Number,
     },
-    img_src: {
+    song: {
       required: true,
-      type: String,
+      type: Object,
     },
-    title: {
-      required: true,
-      type: String,
-    },
-    artist: {
-      required: true,
-      type: String,
-    },
-    uploader: {
-      required: true,
-      type: String,
-    },
-    last_modified: {
-      required: true,
-      type: String /* need improvement */,
-    },
-    time: {
-      required: true,
-      type: String,
+  },
+  computed: {
+    formatLastModified() {
+      return moment(this.$props.song.last_modified).fromNow();
     },
   },
 });
@@ -60,21 +45,33 @@ td {
   vertical-align: middle;
 }
 
-.title {
-  display: flex;
-  align-items: center;
-  padding: 10px;
+tr:hover {
+  background-color: #222222;
 
-  img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    margin-right: 15px;
+  h4 {
+    text-decoration: underline;
   }
+}
 
-  .content {
-    small {
-      color: rgb(167, 167, 167);
+.title {
+  a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+
+    img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+
+    .content {
+      small {
+        color: rgb(167, 167, 167);
+      }
     }
   }
 }

@@ -28,7 +28,7 @@ export default defineComponent({
     return {
       songs: [] as object[],
       there_is_song: false,
-      message: 'Please wait...',
+      message: 'Loading...',
     };
   },
   async created() {
@@ -40,7 +40,7 @@ export default defineComponent({
       this.there_is_song = true;
       snapshot.forEach(this.addSong);
     } else {
-      this.message = "You don't have a song yet.";
+      this.message = "You don't have any song yet.";
     }
   },
   methods: {

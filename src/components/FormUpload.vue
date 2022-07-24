@@ -97,7 +97,9 @@
         />
       </small>
     </div>
-    <button class="btn btn-success mt-2">Submit</button>
+    <button class="btn btn-success mt-2" :disabled="upl.in_submission">
+      Submit
+    </button>
   </vee-form>
 </template>
 
@@ -221,7 +223,9 @@ export default defineComponent({
                 'Congrats! Your song song been uploaded successfully.';
               this.upl.progress_variant = 'bg-success';
 
-              this.$router.push({ name: 'manage' });
+              setTimeout(() => {
+                this.$router.push({ name: 'manage' });
+              }, 500);
             }
           );
         }
