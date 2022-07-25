@@ -12,7 +12,6 @@
     <!-- sidebar__content -->
     <div class="sidebar__content">
       <SideLink to="home" icon="fas fa-home" title="Home" />
-      <SideLink to="search" icon="fas fa-search" title="Search" />
       <SideLink
         to="upload"
         icon="fa-solid fa-plus"

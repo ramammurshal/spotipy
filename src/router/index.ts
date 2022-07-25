@@ -3,7 +3,6 @@ import store from '@/store';
 
 const HomeView = () => import('@/views/Home.vue');
 const SongView = () => import('@/views/Song.vue');
-const SearchView = () => import('@/views/Search.vue');
 const UploadView = () => import('@/views/Upload.vue');
 const ManageView = () => import('@/views/Manage.vue');
 const AboutView = () => import('@/views/About.vue');
@@ -19,11 +18,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'song',
     path: '/song/:id',
     component: SongView,
-  },
-  {
-    path: '/search',
-    name: 'search',
-    component: SearchView,
   },
   {
     path: '/upload',
