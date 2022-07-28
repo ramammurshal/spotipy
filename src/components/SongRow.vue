@@ -12,6 +12,7 @@
       </router-link>
     </td>
     <td>{{ formatLastModified }}</td>
+    <!-- to do: remove this from UI -->
     <td>3.33</td>
   </tr>
 </template>

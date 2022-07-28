@@ -10,7 +10,10 @@
       </div>
     </div>
     <div class="song__play">
-      <button class="btn btn-success" @click.prevent="startSong(song)">
+      <button
+        class="btn btn-success shadow-none"
+        @click.prevent="startSong(song)"
+      >
         <i class="fa-solid fa-play"></i> Play Song
       </button>
     </div>
@@ -46,15 +49,27 @@
               />
             </small>
           </div>
-          <button class="btn btn-success" :disabled="in_submission">
+          <button class="btn btn-success shadow-none" :disabled="in_submission">
             Submit
           </button>
         </vee-form>
       </div>
+      <hr />
       <div class="comments__main">
-        <div class="row" v-for="comment in comments" :key="comment.docId">
+        <div class="filter__comments">
+          <select
+            class="form-select shadow-none"
+            aria-label="Filter comment by date"
+            v-if="comments.length"
+            v-model="sort"
+          >
+            <option value="1" selected>Latest</option>
+            <option value="2">Oldest</option>
+          </select>
+        </div>
+        <div class="row" v-for="comment in sortedComments" :key="comment.docId">
           <h5>{{ comment.name }}</h5>
-          <small>{{ comment.date_posted }}</small>
+          <small>{{ comment.show_date_posted }}</small>
           <p>
             {{ comment.comment }}
           </p>
@@ -89,6 +104,7 @@ export default defineComponent({
       show_alert: false,
       alert_variant: 'alert-primary',
       alert_message: 'Please Wait! Your comment is being submitted.',
+      sort: '1' as '1' | '2',
     };
   },
   async beforeRouteEnter(to, from, next) {
@@ -117,6 +133,15 @@ export default defineComponent({
   },
   computed: {
     ...mapState(['userLoggedIn', 'current_song']),
+    sortedComments(): [] {
+      return this.comments.sort((a: any, b: any) => {
+        if (this.sort === '1') {
+          return b.date_posted - a.date_posted;
+        }
+
+        return a.date_posted - b.date_posted;
+      });
+    },
   },
   methods: {
     getSong(document: any) {
@@ -155,7 +180,8 @@ export default defineComponent({
       commentsSnapshot.forEach((document: any) => {
         const comment: any = {
           ...document.data(),
-          date_posted: moment(document.data().date_posted).fromNow(),
+          date_posted: moment(document.data().date_posted),
+          show_date_posted: moment(document.data().date_posted).fromNow(),
           docId: document.id,
         };
         this.comments.push(comment);
@@ -221,13 +247,18 @@ $bottom: #2a1f53;
   }
 
   .comments__main {
-    padding: 0 10px;
+    .filter__comments {
+      margin-bottom: 20px;
+      width: 30%;
+    }
 
     .row {
-      margin-bottom: 20px;
       background-color: #222;
       padding: 10px;
       border-radius: 10px;
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 20px;
 
       small {
         color: rgb(167, 167, 167);

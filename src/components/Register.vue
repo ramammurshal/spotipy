@@ -72,7 +72,7 @@
       />
     </div>
     <button
-      class="btn btn-success mt-2 float-end"
+      class="btn btn-success mt-2 float-end shadow-none"
       :disabled="regist.in_submission"
     >
       Register

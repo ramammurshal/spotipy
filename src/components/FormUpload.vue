@@ -97,12 +97,13 @@
         />
       </small>
     </div>
-    <button class="btn btn-success mt-2" :disabled="upl.in_submission">
+    <button
+      class="btn btn-success mt-2 shadow-none"
+      :disabled="upl.in_submission"
+    >
       Submit
     </button>
   </vee-form>
-
-  <!-- to do: fix button is hidden by player -->
 </template>
 
 <script lang="ts">

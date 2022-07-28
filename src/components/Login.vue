@@ -38,7 +38,7 @@
         />
       </small>
     </div>
-    <button class="btn btn-success mt-2 float-end">Login</button>
+    <button class="btn btn-success mt-2 float-end shadow-none">Login</button>
   </vee-form>
 </template>
 

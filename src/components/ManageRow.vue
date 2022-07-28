@@ -21,14 +21,14 @@
       </div>
       <div>
         <button
-          class="btn btn-warning"
+          class="btn btn-warning shadow-none"
           :disabled="in_submission"
           @click.prevent="toggleEditSong"
         >
           <i class="fa-solid fa-pen-to-square"></i> Edit
         </button>
         <button
-          class="btn btn-danger"
+          class="btn btn-danger shadow-none"
           :disabled="in_submission"
           @click.prevent="deleteSong"
         >
@@ -84,7 +84,9 @@
           />
         </small>
       </div>
-      <button class="btn btn-success" :disabled="in_submission">Submit</button>
+      <button class="btn btn-success shadow-none" :disabled="in_submission">
+        Submit
+      </button>
     </vee-form>
   </div>
 </template>
