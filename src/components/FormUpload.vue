@@ -101,6 +101,8 @@
       Submit
     </button>
   </vee-form>
+
+  <!-- to do: fix button is hidden by player -->
 </template>
 
 <script lang="ts">

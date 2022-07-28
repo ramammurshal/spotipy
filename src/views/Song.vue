@@ -10,14 +10,15 @@
       </div>
     </div>
     <div class="song__play">
-      <button class="btn btn-success">
+      <button class="btn btn-success" @click.prevent="startSong(song)">
         <i class="fa-solid fa-play"></i> Play Song
       </button>
     </div>
     <div class="song__comments p-3">
       <div class="comments__header">
-        <!-- to do: fix this -->
-        <p>{{ comments.length }} comments</p>
+        <p v-if="comments.length === 0">0 comment</p>
+        <p v-else-if="comments.length === 1">1 comment</p>
+        <p v-else>{{ comments.length }} comments</p>
         <p><i class="fa-solid fa-comment"></i></p>
       </div>
       <div class="comments__form" v-if="userLoggedIn">
@@ -66,7 +67,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import Swal from 'sweetalert2';
 import { songsCollection, commentsCollection, auth } from '@/includes/firebase';
 import moment from 'moment';
@@ -115,7 +116,7 @@ export default defineComponent({
     this.getComments();
   },
   computed: {
-    ...mapState(['userLoggedIn']),
+    ...mapState(['userLoggedIn', 'current_song']),
   },
   methods: {
     getSong(document: any) {
@@ -160,8 +161,10 @@ export default defineComponent({
         this.comments.push(comment);
       });
     },
+    startSong(song: object) {
+      this.$store.dispatch('startSong', song);
+    },
   },
-  // to do next: music bottom, play music, internationalization, responsive, deploying
 });
 </script>
 

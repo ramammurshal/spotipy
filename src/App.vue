@@ -4,6 +4,7 @@
     <main>
       <router-view></router-view>
     </main>
+    <Player />
   </div>
 </template>
 
@@ -11,12 +12,14 @@
 import { defineComponent } from 'vue';
 import Sidebar from '@/components/Sidebar.vue';
 import Navbar from '@/components/Navbar.vue';
+import Player from '@/components/Player.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     Sidebar,
     Navbar,
+    Player,
   },
   created() {
     this.$store.dispatch('init_login');
@@ -34,7 +37,7 @@ export default defineComponent({
   background-color: #0e0e0e;
   color: white;
   font-family: 'Goth';
-  height: 100vh;
+  height: calc(100vh - 90px);
 
   main {
     width: 100%;
