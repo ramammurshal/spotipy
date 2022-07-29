@@ -5,6 +5,7 @@ import router from './router';
 import store from './store';
 import VeeValidation from './includes/validation';
 import { auth } from './includes/firebase';
+import i18n from './includes/i18n';
 
 import '@/assets/css/main.scss';
 
@@ -23,6 +24,7 @@ auth.onAuthStateChanged(() => {
     app.use(store);
     app.use(router);
     app.use(VeeValidation);
+    app.use(i18n);
 
     app.mount('#app');
   }

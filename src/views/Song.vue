@@ -19,9 +19,13 @@
     </div>
     <div class="song__comments p-3">
       <div class="comments__header">
-        <p v-if="comments.length === 0">0 comment</p>
-        <p v-else-if="comments.length === 1">1 comment</p>
-        <p v-else>{{ comments.length }} comments</p>
+        <p>
+          {{
+            $tc('song.comment_count', song.comment_count, {
+              count: song.comment_count,
+            })
+          }}
+        </p>
         <p><i class="fa-solid fa-comment"></i></p>
       </div>
       <div class="comments__form" v-if="userLoggedIn">

@@ -1,0 +1,5 @@
+{
+  "about": {
+    "us": "Spotipy adalah aplikasi yang mengizinkan pengguna untuk berbagi, mendengarkan, dan bercerita terkait musik yang diunggah oleh seluruh pengguna. Aplikasi ini terinspirasi dari salah satu perusahaan penyiar musik terbaik di dunia yang berasal dari swedia, Spotify. Aplikasi ini dibangun menggunakan beberapa teknologi modern saat ini seperti VueJS, Vue-Router, Vuex, Typescript, Bootstrap, Howler, Moment, Sweetalert2, Vee-Validate, Vue-i18n. "
+  }
+}

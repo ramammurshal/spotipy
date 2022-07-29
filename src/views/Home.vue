@@ -9,7 +9,6 @@
           <th>#</th>
           <th>Title</th>
           <th>Last Modified</th>
-          <th><i class="fa-solid fa-clock"></i></th>
         </tr>
       </thead>
       <tbody>
