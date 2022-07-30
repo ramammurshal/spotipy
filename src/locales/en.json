@@ -1,6 +1,6 @@
 {
   "about": {
-    "us": "Spotipy is an application that allows users to share, listen and comments to music uploaded by all users. This application is inspired by one of the best music broadcasting companies in the world from Sweden, Spotify. This application is built using some of today's modern technologies such as VueJS, Vue-Router, Vuex, Typescript, Bootstrap, Howler, Moment, Sweetalert2, Vee-Validate, Vue-i18n."
+    "us": "Spotipy is an application that allows users to share, listen and comments to music uploaded by all users. This application is inspired by one of the best music broadcasting companies in the world from Sweden, Spotify. This application is built using some of today's modern technologies such as VueJS, Vue-Router, Vuex, Vue-Animation, Typescript, Bootstrap, SCSS, Howler, Moment, Sweetalert2, Vee-Validate, Vue-i18n, and Firebase as Backend Services."
   },
   "song": {
     "comment_count": "No comments | 1 comment | {count} comments"

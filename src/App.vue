@@ -2,7 +2,12 @@
   <div class="__app d-flex">
     <Sidebar />
     <main>
-      <router-view></router-view>
+      <Navbar />
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
     </main>
     <Player />
   </div>
@@ -31,6 +36,19 @@ export default defineComponent({
 @font-face {
   font-family: 'Goth';
   src: url('./assets/font/GothamMedium.ttf');
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 0.5s linear;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transition: all 0.5s linear;
 }
 
 .__app {

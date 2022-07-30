@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <div class="p-3">
     <div class="d-flex justify-content-between mb-4">
       <h3>About Apps</h3>
@@ -19,13 +18,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Navbar from '@/components/Navbar.vue';
 
 export default defineComponent({
   name: 'About',
-  components: {
-    Navbar,
-  },
   computed: {
     currentLocale() {
       return this.$i18n.locale === 'en' ? 'English' : 'Indonesia';

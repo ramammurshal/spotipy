@@ -1,10 +1,10 @@
 <template>
   <nav>
     <div class="helper__move">
-      <button class="helper__button">
+      <button class="helper__button" @click.prevent="handleBack">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
-      <button class="helper__button">
+      <button class="helper__button" @click.prevent="handleForward">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
     </div>
@@ -62,6 +62,12 @@ export default defineComponent({
     async signOut() {
       await this.$store.dispatch('signOut');
       window.location.reload();
+    },
+    handleBack() {
+      this.$router.back();
+    },
+    handleForward() {
+      this.$router.forward();
     },
   },
 });

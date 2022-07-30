@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <div class="p-3">
     <h3>Manage Your Songs</h3>
     <hr />
@@ -15,13 +14,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { auth, songsCollection } from '@/includes/firebase';
-import Navbar from '@/components/Navbar.vue';
 import ManageRow from '@/components/ManageRow.vue';
 
 export default defineComponent({
   name: 'Manage',
   components: {
-    Navbar,
     ManageRow,
   },
   data() {

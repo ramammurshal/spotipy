@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <div v-if="song.song_title">
     <div class="song__header">
       <img :src="song.cover" :alt="song.song_title" />
@@ -71,7 +70,11 @@
             <option value="2">Oldest</option>
           </select>
         </div>
-        <div class="row" v-for="comment in sortedComments" :key="comment.docId">
+        <div
+          class="row"
+          v-for="(comment, index) in sortedComments"
+          :key="index"
+        >
           <h5>{{ comment.name }}</h5>
           <small>{{ comment.show_date_posted }}</small>
           <p>
@@ -86,17 +89,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 import Swal from 'sweetalert2';
 import { songsCollection, commentsCollection, auth } from '@/includes/firebase';
 import moment from 'moment';
-import Navbar from '@/components/Navbar.vue';
 
 export default defineComponent({
   name: 'Song',
-  components: {
-    Navbar,
-  },
   data() {
     return {
       song: {} as any,
@@ -138,7 +137,7 @@ export default defineComponent({
   computed: {
     ...mapState(['userLoggedIn', 'current_song']),
     sortedComments(): [] {
-      return this.comments.sort((a: any, b: any) => {
+      return this.comments.slice().sort((a: any, b: any) => {
         if (this.sort === '1') {
           return b.date_posted - a.date_posted;
         }
